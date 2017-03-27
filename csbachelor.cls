@@ -26,10 +26,10 @@
 \ExecuteOptions{twoside,oneside}
 \ProcessOptions\relax
 \ifzju@side
-   \LoadClass[a4paper,12pt,twoside,titlepage,openany]{book}
+   \LoadClass[a4paper,12pt,twoside,titlepage,openany]{article}
    \def\zjuside{T}
 \else
-   \LoadClass[a4paper,12pt,oneside,titlepage]{book}
+   \LoadClass[a4paper,12pt,oneside,titlepage]{article}
    \def\zjuside{O}
 \fi
 
@@ -129,19 +129,19 @@
 \DeclareRobustCommand{\youti}{\CJKfamily{YouYuan}}
 \setcounter{secnumdepth}{4}
 
-\titleformat{\chapter}[block]%
-{\sanhao\heiti\filcenter}{第 \thechapter{} 章}{1em}{}{}
-\titlespacing{\chapter}%
-  {0pt}{0.3\baselineskip}{0.3\baselineskip}
-\titlecontents{chapter}[1.5em]{}%
-{第 \thecontentslabel{} 章\hspace{1em}}{}{\titlerule*[10pt]{.}\contentspage}
+% \titleformat{\chapter}[block]%
+% {\sanhao\heiti\filcenter}{第 \thechapter{} 章}{1em}{}{}
+% \titlespacing{\chapter}%
+%   {0pt}{0.3\baselineskip}{0.3\baselineskip}
+% \titlecontents{chapter}[1.5em]{}%
+% {第 \thecontentslabel{} 章\hspace{1em}}{}{\titlerule*[10pt]{.}\contentspage}
 
-\titleformat{\section}[hang]%
-  {\sihao\heiti}{\thesection}{1em}{}{}
+\titleformat{\section}[block]%
+  {\sihao\heiti}{\thesection{}}{1em}{}{}
 \titlespacing{\section}%
   {0pt}{0.2\baselineskip}{0.2\baselineskip}
 \titlecontents{section}[2.2em]{}%
-{\hspace{1em}\thecontentslabel\hspace{1em}}{}{\titlerule*[7pt]{.}\contentspage}
+{\hspace{1em}\thecontentslabel{}\hspace{1em}}{}{\titlerule*[7pt]{.}\contentspage}
 
 \titleformat{\subsection}[hang]%
   {\xiaosi\heiti}{\thesubsection}{1em}{}{}
@@ -157,7 +157,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 \fancypagestyle{plain}{
   \fancyhf{}
@@ -172,7 +172,7 @@
 \renewcommand{\listfigurename}{\centerline{图~目~录}}
 \renewcommand{\listtablename}{\centerline{表~目~录}}
 \setcounter{tocdepth}{1}  % 设置目录的深度到 subsection
-\renewcommand{\bibname}{参~考~文~献}
+\renewcommand{\refname}{参~考~文~献}
 \renewcommand{\nomname}{\centerline{术~语~表}}
 \renewcommand{\nomlabelwidth}{25mm}
 \renewcommand{\nompreamble}{\vspace{1em}}
@@ -186,10 +186,10 @@
 \newtheoremstyle{zjutheorem}
    {9pt}{9pt}{\ttfamily}{0pt}{\lishu}{：}{0pt}{}
 \theoremstyle{zjutheorem}
-\newtheorem{zjuhypothsis}{假设~}[chapter]
-\newtheorem{zjudefine}{定义~}[chapter]
-\newtheorem{zjutheorem}{定理~}[chapter]
-\newtheorem{zjuproposition}{命题~}[chapter]
+% \newtheorem{zjuhypothsis}{假设~}[chapter]
+% \newtheorem{zjudefine}{定义~}[chapter]
+% \newtheorem{zjutheorem}{定理~}[chapter]
+% \newtheorem{zjuproposition}{命题~}[chapter]
 \newenvironment{zjuproof}{\begin{proof}[\textnormal{\lishu 证明~}]}{\end{proof}}
 \newcolumntype{.}{D{.}{.}{2.4}}
 \AtBeginDocument{%

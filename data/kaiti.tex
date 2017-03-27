@@ -1,6 +1,7 @@
 %\chapter{本科毕业论文开题报告}
-
-\chapter{课题背景}
+\setcounter{page}{1}
+{\sanhao\heiti\filcenter \centerline{本科毕业论文开题报告}}
+\section{课题背景}
 
 人类语言具有特殊的结构，能够方便的传达意义，自然语言处理(NLP)就是研究人类语言的一个学科。而问答系统(Question Answering)的NLP问题之一。NLP中的很多问题都可以转换为QA问题(例如：机器翻译、情感分析、实体标记等)。随着智能语音助手（例如：苹果的Siri、谷歌的Google Assistant和微软的Cortana）的流行，
 QA问题更是被广泛的予以关注。而QA问题本身是一项很复杂的NLP任务。想要对问题做出回答，需要具有分析一段文字，进行归纳总结的能力。\\
@@ -9,7 +10,7 @@ QA问题更是被广泛的予以关注。而QA问题本身是一项很复杂的N
 也不需要对语言做特定对解析等预处理行为。这些模型在需要很少的预处理过程的前提下，达到或者超过了传统的模型，取得了很好的结果。这些模型依赖于记忆(Memory)模块和注意力(Attention)模块，起到了能够从上下文总结信息、进行推理等作用。\\
 Dynamic Memory Network就是这样一个使用了记忆和注意力模块的模型。这个模型在能够取得当前领先的结果。模型由四个模块组成：输入模块、片段记忆模块、问题模块、回答模块。\\
 本毕业论文将给予Dynamic Memory Network,首先实现这一模型，然后再对这一模型进行进一步扩展优化，最后将我们优化后的模型应用于技术文档数据集中。\\
-\chapter{目标和内容}
+\section{目标和内容}
 本次毕业论文主要任务是基于Dynamic Memory Network模型的优化及其应用，具体来讲，分为以下几个子目标：
 \begin{itemize}
 \item 实现基准模型，作为实验对照
@@ -30,7 +31,7 @@ Dynamic Memory Network就是这样一个使用了记忆和注意力模块的模�
     \item Google Cloud Platform： 32GB内存，Nvidia Tesla K80显卡：训练数据。 
     \end{itemize}
 \end{itemize}
-\chapter{研究方案和关键技术考虑}
+\section{研究方案和关键技术考虑}
 \subsection{研究方案}
 本次实验采用对照实验，一个基准组和两个对照组。基准组是将词向量直接作为输入进入最简单的神经网络架构中，来实现的。一个实验组是实现Dynmaic Memory Network的基础模型的实验组，
 另外一个实验组是对基础Dynamic Memory Network优化后的实验组。
@@ -144,9 +145,9 @@ m^t = GRU(e^t,m^{t-1})
       \end{figure}
 \subsubsection{回答模块}
 回答模块通过softmax产生对于回答标签的概率分布，然后产生单个单词回答，也可以将输入状态向量RNN来产生多个单词的回答。
-\chapter{预期研究结果}
+\section{预期研究结果}
 本次毕设预期结果是实现基础Dynamic Memory Network，对起进行优化，提高回答准确率，在单词回答的技术上支持多词回答，并且最终应用到技术文档中。
-\chapter{进度计划}
+\section{进度计划}
 \begin{itemize}
 \item 3月31日$\sim$4月10日:编写基准模型和基础Dynamic Memory Network模型 
 \item 4月11日$\sim$4月17日:训练、验证和测试基准模型和基础Dynamic Memory Network模型
