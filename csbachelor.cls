@@ -166,7 +166,7 @@
   \fancyfoot[C]{\xiaowu\thepage}}
 \fancyhf{}
 \fancyhead[L]{\xiaowu\songti 浙江大学计算机科学与技术学院本科毕业论文}
-\fancyhead[R]{\xiaowu\songti\leftmark}
+\fancyhead[R]{\xiaowu\songti 开题报告}
 \fancyfoot[C]{\xiaowu\thepage}
 \renewcommand{\contentsname}{\centerline{目\quad 录}}
 \renewcommand{\listfigurename}{\centerline{图~目~录}}
