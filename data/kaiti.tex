@@ -5,17 +5,17 @@
 
 人类语言具有特殊的结构，能够方便的传达意义，自然语言处理(NLP)就是研究人类语言的一个学科。而问答系统(Question Answering)的NLP问题之一。NLP中的很多问题都可以转换为QA问题(例如：机器翻译、情感分析、实体标记等)。随着智能语音助手（例如：苹果的Siri、谷歌的Google Assistant和微软的Cortana）的流行，
 QA问题更是被广泛的予以关注。而QA问题本身是一项很复杂的NLP任务。想要对问题做出回答，需要具有分析一段文字，进行归纳总结的能力。\\
-传统的解决QA的方法通常依赖于固定结构的知识数据库，而这些数据库通常是由特定领域的专家人工搭建的。当进行问题回答时，首先解析问题，然后将问题转换成特定结构的查询语句，在数据库中搜寻，在将查询结果组合成回答呈现给用户。\\
+传统解决QA的方法通常依赖于固定结构的知识数据库，而这些数据库通常是由特定领域的专家人工搭建的。当进行问题回答时，首先解析问题，然后将问题转换成特定结构的查询语句，在数据库中搜寻，最后将查询结果组合成回答呈现给用户。\\
 随着深度学习领域的迅速发展，以神经网络为基础的方法已经在文字和图像分类识别领域取得了重大的进展。最近，开始逐渐有人将神经网络应用于比较复杂的任务，例如逻辑推理上。这些通过神经网络产生的隐式的语言表达不需要依赖于特定的语言结构，
 也不需要对语言做特定对解析等预处理行为。这些模型在需要很少的预处理过程的前提下，达到或者超过了传统的模型，取得了很好的结果。这些模型依赖于记忆(Memory)模块和注意力(Attention)模块，起到了能够从上下文总结信息、进行推理等作用。\\
 Dynamic Memory Network就是这样一个使用了记忆和注意力模块的模型。这个模型在能够取得当前领先的结果。模型由四个模块组成：输入模块、片段记忆模块、问题模块、回答模块。\\
 本毕业论文将给予Dynamic Memory Network,首先实现这一模型，然后再对这一模型进行进一步扩展优化，最后将我们优化后的模型应用于技术文档数据集中。\\
 \section{目标和内容}
-本次毕业论文主要任务是基于Dynamic Memory Network模型的优化及其应用，具体来讲，分为以下几个子目标：
+本次毕业论文主要任务是基于Dynamic Memory Network模型的设计和实现，具体来讲，分为以下几个子目标：
 \begin{itemize}
 \item 实现基准模型，作为实验对照
 \item 实现基础Dynamic Memory Network
-\item 对Dynamic Memory Networt进行进一步优化（输入表达可以进一步尝试使用GloVe和基于字的词表达，记忆模块尝试使用GRU、LSTM和bidirectional LSTM优化)
+\item 对Dynamic Memory Network进行进一步优化（输入表达可以进一步尝试使用GloVe和基于字的词表达，记忆模块尝试使用GRU、LSTM和bidirectional LSTM优化)
 \item 在单词回答的技术上支持多词回答
 \item 将优化后的模型应用于技术文档数据集
 \end{itemize} 
@@ -33,8 +33,8 @@ Dynamic Memory Network就是这样一个使用了记忆和注意力模块的模�
 \end{itemize}
 \section{研究方案和关键技术考虑}
 \subsection{研究方案}
-本次实验采用对照实验，一个基准组和两个对照组。基准组是将词向量直接作为输入进入最简单的神经网络架构中，来实现的。一个实验组是实现Dynmaic Memory Network的基础模型的实验组，
-另外一个实验组是对基础Dynamic Memory Network优化后的实验组。
+本次实验采用对照实验，一个基准组和两个对照组。基准组是将词向量直接作为输入进入最简单的神经网络架构中来实现的。一个实验组是实现Dynmaic Memory Network的基础模型的实验组，
+另外一个实验组是对基础Dynamic Memory Network优化后的实验组。\\
 本次实验使用Facebook bABi数据集。bABi数据集分成20个子集，每个子集具有不同的结构，图1.1为数据集中的一些例子\cite{DBLP:journals/corr/WestonBCM15}。每个子集有1000个训练样本和1000个测试样本。我们使用训练样本对我们的三个模型进行训练，
 使用测试样本进行测试。一个模型只有能够正确回答95\%的测试集问题，则称之为能够通过这个子任务集。
 \begin{figure}[h]
@@ -49,7 +49,7 @@ Word2Vec就是基于这一想法的一种高效的词汇表达方法。特别的
 尽管Word2Vec已经被实验证明可以发掘出复杂的语义相似关系，但是是根据局部上下文来预测，往往忽略了整体的信息。与之对应的，Pennington et al.\cite{pennington2014glove}提出的Global Vectors for Word Representation (GloVe)使用全局的统计信息预测单词$i$出现在单词$j$的上下文中的概率。
 具体来讲，GloVe使用最小二乘作为目标函数训练词词共生矩阵。GloVe在很多词汇相似性任务中已经表现出优越的结果。\\
 \subsection{递归神经网络（RNN）}
-递归神经网络是一种特别适合对时序信息建模的神经网络架构。在$t$时刻，RNN输入词矩阵$w_t$和上一步的隐式状态向量$h_{t-1}$进行下面的运算后，产生这一步点隐式状态向量:\\
+递归神经网络是一种特别适合对时序信息建模的神经网络架构。在$t$时刻，RNN输入词矩阵$w_t$和上一步的隐式状态向量$h_{t-1}$进行下面的运算后，产生这一步点隐式状态向量\cite{mikolov2010recurrent}:\\
 \begin{equation}
 h_t = f(Wx_t+Uh{t-1}+b)
 \end{equation}
@@ -95,7 +95,7 @@ h_t = o_t \odot tanh(c_t)
 式(8)确定了最终记忆应该多大程度上保存到隐式状态中。式(9)根据输入词$x_t$和$h_{t-1}$产生新的记忆。式(10)根据新记忆和$h_{t-1}$产生最终记忆。
 
 \subsection{Dynamic Memory Network}
-Kumar et al.\cite{DBLP:journals/corr/KumarISBEPOGS15} Dynamic Memory Network由四个模块组成，分别是：输入模块、片段记忆模块、问题模块、回答模块。整体的架构如图表所示。\\
+Kumar et al.\cite{DBLP:journals/corr/KumarISBEPOGS15}提出的 Dynamic Memory Network由四个模块组成，分别是：输入模块、片段记忆模块、问题模块、回答模块。整体的架构如图表所示。\\
 \begin{figure}[h]
       \centering
         \includegraphics[width=0.6\textwidth]{./images/dynamic-memory-network-structure}
